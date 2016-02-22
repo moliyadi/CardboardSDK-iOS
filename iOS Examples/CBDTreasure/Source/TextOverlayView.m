@@ -8,7 +8,6 @@
 
 #import "TextOverlayView.h"
 
-
 @interface UIView (CBDConstraints)
 
 - (void)addConstraintsWithVisualFormats:(NSArray *)formats

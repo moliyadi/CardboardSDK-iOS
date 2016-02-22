@@ -13,6 +13,9 @@
 #import <AudioToolbox/AudioServices.h>
 #import <OpenGLES/ES2/glext.h>
 
+#import <AVFoundation/AVPlayer.h>
+#import <AVFoundation/AVPlayerItem.h>
+#import <AVFoundation/AVPlayerLayer.h>
 
 @interface TreasureRenderer : NSObject
 {
@@ -725,6 +728,17 @@ float randomFloat()
     [self.textOverlayView showTitle:@"CardboardSDK-iOS"
                            messsage:@"Look for the cube, center your vision\non it and pull the trigger."
                            duration:10.0f];
+    
+//    //mabiao
+//    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:@"http://192.166.62.66:8060/live/MultiAudioTrak_800.m3u8?offset=14400&duration=14400&token=undefined&userid=&platform=5&channelid=11&deviceid=5AAAADAD6&location=100085&clientsessionid=42201"]];
+//    AVPlayer *player = [AVPlayer playerWithPlayerItem:playerItem];
+//    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
+//    //playerLayer.frame = self.view.layer.bounds;
+//    playerLayer.frame = CGRectMake(0, 0, 100.0, 100.0);
+//    playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+//    [self.textOverlayView.layer addSublayer:playerLayer];
+//    
+//    [player play];
 }
 
 - (void)shutdownRendererWithView:(GLKView *)glView
@@ -741,12 +755,14 @@ float randomFloat()
 {
     [self.treasureRenderer prepareNewFrameWithHeadViewMatrix:headViewMatrix];
     [self.textOverlayView updateTexturesIfNeeded];
+    NSLog(@"prepareNewFrameWithHeadViewMatrix:");
 }
 
 - (void)drawEyeWithEye:(CBDEye *)eye
 {
     [self.treasureRenderer drawEyeWithEye:eye];
     [self.textOverlayView renderTextureForEye:eye.type];
+    NSLog(@"drawEyeWithEye:%@", eye);
 }
 
 - (void)finishFrameWithViewportRect:(CGRect)viewPort
